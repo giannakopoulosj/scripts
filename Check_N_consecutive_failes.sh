@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Number to get the last N executions
 N=5
 CONSECUTIVE_FAILES=0
