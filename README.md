@@ -1,9 +1,9 @@
 # scripts
-Repository for: \n
-Script template
-Keep track ideas
-Usefull completed scripts
+Repository for: <br><br>
+**Script template** <br>
+**Keep track ideas** <br>
+**Usefull completed scripts** <br><br>
 
 
 
-Note: FINAL_ is tag for ready scrips
+Note: **FINAL_** is tag for ready scrips
