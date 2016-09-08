@@ -1,15 +1,13 @@
-#!/bin/bash
-
+# stop on errors
 set -e
-
+ 
 scriptname=$(basename $0)
-lock="../${scriptname}"
-
-exec 200>$lock
-flock -n 200 || (echo "Running..." && exit 1)
-
-## The code:
+pidfile="/var/run/${scriptname}"
+ 
+# lock it
+exec 200>$pidfile
+flock -n 200 || exit 1
 pid=$$
 echo $pid 1>&200
-sleep 60
-echo "Hello world"
+ 
+## Your code:
