@@ -2,7 +2,7 @@
 set -e
  
 scriptname=$(basename $0)
-pidfile="/var/run/${scriptname}"
+pidfile="/var/tmp/${scriptname}"
  
 # lock it
 exec 200>$pidfile
