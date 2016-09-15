@@ -1,13 +1,13 @@
 # stop on errors
 set -e
  
-scriptname=$(basename $0)
-pidfile="/var/tmp/${scriptname}"
+_SCRIPTNAME=$(basename $0)
+_PIDFILE="/var/tmp/${_SCRIPTNAME}"
  
 # lock it
-exec 200>$pidfile
+exec 200>"$_PIDFILE"
 flock -n 200 || exit 1
-pid=$$
-echo $pid 1>&200
+_PID=$$
+echo "$_PID" 1>&200
  
 ## Your code:
