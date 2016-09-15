@@ -9,7 +9,7 @@ _SUPPORT="Support Team"
 
 echo "In case of failure please contact $_SUPPORT"
 
-cd "$_HDIR" || echo "No $_HDIR found" && exit 1
+cd "$_HDIR" || (echo "No $_HDIR found" && exit 1)
 
 echo -e "Before Housekeeping of $_HDIR\n\n"
 df -m "$_HDIR"
