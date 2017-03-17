@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied"
+    echo "Usage is ./$0 n_of_files from_path to_path"
+fi
+
+
 _TPATH=/foo/bar
 _DPATH=/dest/path
 
