@@ -1,31 +1,39 @@
 #!/bin/bash
 
-# A slicker error handling routine
+#FUNCTION_CODE_HERE
 
-# I put a variable in my scripts named PROGNAME which
-# holds the name of the program being run.  You can get this
-# value from the first item on the command line ($0).
-#Source: http://linuxcommand.org/wss0150.php
+function error {
 
-PROGNAME=$(basename $0)
-
-function error_exit
-{
-
-#	----------------------------------------------------------------
-#	Function for exit due to fatal program error
-#		Accepts 1 argument:
-#			string containing descriptive error message
-#	----------------------------------------------------------------
-
-
-	echo "${PROGNAME}: ${1:-"Unknown Error"}" 1>&2
-	exit 1
+    echo "----------------------------"
+    echo "|   In case his job fails  |"
+    echo "|     Please contact       |"
+    echo "|          XXX XXX         |"
+    echo "----------------------------"               
 }
 
-# Example call of the error_exit function.  Note the inclusion
-# of the LINENO environment variable.  It contains the current
-# line number.
+function completed {
 
-echo "Example of error with line number and message"
-error_exit "$LINENO: An error has occurred."
+    echo "----------------------------"
+    echo "|      Execution was       |"
+    echo "|  completed successfully  |"
+    echo "----------------------------"               
+}
+
+
+#MAIN_CODE_HERE
+
+function main {
+
+
+return $exit_code
+}
+
+main
+error_validation=$?
+if [ $error_validation -ne 0 ]
+then
+error
+else 
+completed
+exit 0
+fi
