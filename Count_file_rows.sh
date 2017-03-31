@@ -13,3 +13,5 @@ grep --regexp="$" --count file.log
 
 #Simple way for one file
 wc -l file.log | awk '{print $1}'
+cat file.log | wc -l
+wc -l < file.log
