@@ -5,8 +5,11 @@
 #xargs -0 Input  items  are  terminated by a null character instead of by whitespace
 
 
-find . -type f -name "*pattern*" -print0 | xargs -0 wc -l
+find . -type f -name "*file.log*" -print0 | xargs -0 wc -l
 
 #Dummy Way
 #grep to count all line termination 
 grep --regexp="$" --count file.log
+
+#Simple way for one file
+wc -l file.log | awk '{print $1}'
