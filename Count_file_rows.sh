@@ -6,3 +6,7 @@
 
 
 find . -type f -name "*pattern*" -print0 | xargs -0 wc -l
+
+#Dummy Way
+#grep to count all line termination 
+grep --regexp="$" --count file.log
