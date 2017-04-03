@@ -10,7 +10,7 @@ echo $_DAYSBACK
 _DAYS=1
 echo $(TZ=a$(((24*$_DAYS))) date +'%Y%m%d')
 
-#TEST FOR SOLARIS
+#TEST FOR SOLARIS change + to - for dates in the future.
 _A_DAY=24
 _TODAY=$(date +%Y%m%d)
 _TWO_DAYS=$(TZ=CST+$(((2*$_A_DAY))) date +'%Y%m%d')
