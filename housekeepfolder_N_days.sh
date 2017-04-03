@@ -1,11 +1,9 @@
 #!/bin/bash
 
-echo "In case of failure please contact CRM"
-
 _HDIR=/foo/bas
 _NDAYS="100"
 _PATTERN="*.csv"
-_SUPPORT="Support Team"
+_SUPPORT="FOO BAR"
 
 echo "In case of failure please contact $_SUPPORT"
 
