@@ -7,7 +7,7 @@ _sleeping_period=600
 #sleeping_period=$2
  
 #first_file=$(ls | head -$_counter)
-for _FILE in $(ls | head -$_counter) #first_file
+for _FILE in $(ls| grep -v $(basename $0) | head -$_counter) #first_file
 do
 #if [ "$_FILE" -a *.xml ];
 #then
