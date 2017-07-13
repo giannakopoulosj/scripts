@@ -1,3 +1,5 @@
+https://unix.stackexchange.com/questions/378270/find-command-enumerate-output-and-allow-selection
+
 When I use find, it often finds multiple results like
 
 find -name pom.xml
