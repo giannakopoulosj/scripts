@@ -1,5 +1,16 @@
-
 #!/bin/bash
+
+###############################################################################
+#
+# File:        ETL_delta_load.sh
+# Description: Get max day and load in another table (delta load)
+# Language:    bash
+# Package:     N/A
+#
+# Authour: 
+#
+###############################################################################
+
 
 last_date=$("$ORACLE_HOME"/bin/sqlplus -s /nolog <<EOF
 connect x/x@x
