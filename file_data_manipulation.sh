@@ -8,4 +8,4 @@ awk -F',' '{ if(length($1) < 1) {print FILENAME}}' foo.bar.file
 #-m = merges (used not to sort the file)
 #-f'|' = speparator is '|'
 #-k2,2 = 2nd column 2 duplicates
-sort -um -f'|' -k2,2 your.file
+sort -um -t'|' -k2,2 your.file
