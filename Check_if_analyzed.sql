@@ -1,3 +1,14 @@
+/*
+GLOBAL_STATS
+For partitioned tables, indicates
+whether statistics were collected for the table as a whole (YES) or 
+were estimated from statistics on underlying partitions and subpartitions (NO)
+
+LAST_ANALYZED
+Date on which this table was most recently analyzed
+*/
+
+
 --Tables
 select owner,table_name,last_analyzed, global_stats
 from dba_tables
