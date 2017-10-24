@@ -9,3 +9,6 @@ sftp -i ther_rsa user@123.456.789.012
 
 #Change working directory direct on sftp connection
 sftp user@123.456.789.012:/home/something
+
+#Generate public key out of private.
+ssh-keygen -y -f ~/.ssh/id_rsa 
