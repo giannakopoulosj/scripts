@@ -3,5 +3,5 @@ getconf PAGESIZE
 sar -r | awk '{print $1,$2*{page_size}/1024/1024/1024}'
 
 
-Memory and SR
+#Memory and SR
 vmstat | awk '{print $5,$12}'
