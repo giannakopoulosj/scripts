@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export MAILTO="xxxxx"
 export msg_from='xxxxxx';
 export SUBJECT="xxxxxxx"
