@@ -1,6 +1,7 @@
-https://unix.stackexchange.com/questions/378270/find-command-enumerate-output-and-allow-selection
+#!/bin/bash
+#https://unix.stackexchange.com/questions/378270/find-command-enumerate-output-and-allow-selection
 
-When I use find, it often finds multiple results like
+#When I use find, it often finds multiple results like
 
 find -name pom.xml
 ./projectA/pom.xml
