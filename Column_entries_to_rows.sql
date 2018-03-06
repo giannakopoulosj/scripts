@@ -3,7 +3,7 @@ from UNIX
 group by server
 --aggregates Multiple entries of different ips to single server
 
-Input Table
+Input:
 Server|IP
 A|1
 A|2
@@ -12,8 +12,7 @@ B|1
 C|1
 C|2
 
-Output Table
+Output:
 A|1, 2, 3
 B|1
 C|1, 2
-     
