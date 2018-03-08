@@ -1,20 +1,20 @@
 #!/bin/bash
 
-
+SCRIPTS=*.sql
 pids=""
-awk -F',' '{ if(length($21) < 1) {print FILENAME".gz"}}' file*.csv >> list &
-pids+=" $!"
-awk -F',' '{ if(length($21) < 1) {print FILENAME".gz"}}' file2*.csv >> list &
-pids+=" $!"
-awk -F',' '{ if(length($21) < 1) {print FILENAME".gz"}}' file3*.csv >> list &
-pids+=" $!"
 
-#the wait time will be the max processing time of the pids jobs.
+for SCRIPT in $SCRIPTS ; do
+  $ORACLE_HOME/bin/sqlplus -s $DBLOGIN/$DBPASS@$ORACLE_SID @$SCRIPT &
+  pids+=" $!"
+  echo "PID of $SCRIPT is: $(echo $pids|awk '{print $NF}')"
+done
+
+
 for p in $pids; do
-       if wait $p; then
-                echo "Process $p success"
-        else
-                echo "Process $p fail"
-          exit 1
-        fi
+ if wait $p; then
+    echo "Process $p success"
+ else
+    echo "Process $p fail"
+    exit 1
+ fi
 done
