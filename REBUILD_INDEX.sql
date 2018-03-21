@@ -1,3 +1,15 @@
+declare 
+pout varchar(2000);
+begin
+xxxx.REBUILD_INDEX (pout);
+dbms_output.put_line(pout);
+end;
+/
+
+
+
+
+
 CREATE OR REPLACE PROCEDURE XXXXXXXXX.REBUILD_INDEX (P_OUT OUT VARCHAR2) AUTHID DEFINER 
 AS
 /******************************************************************************
