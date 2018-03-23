@@ -32,6 +32,6 @@ echo "Sending..."
 echo "<!DOCTYPE html><html><body>Deal all,<br><br>MAIN BODY EMAIL<br><br>" > report.html
 cat out.html >> report.html
 echo "<br><br>Best Regards,<br>Your Team</body></html>" >> report.html
-mailx -r "$msg_from" -s "Futac with Disconnected Cases
+mailx -r "$msg_from" -s "THIS IS THE SUBJECT
 MIME-Version: 1.0
 Content-Type: text/html" -c "$msg_cc" "$msg_to" < report.html
