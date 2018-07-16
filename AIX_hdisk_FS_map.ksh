@@ -1,0 +1,11 @@
+#!/bin/ksh
+for vg in `lsvg -o`; do 
+        for fs in `lsvgfs $vg`; do 
+                printf "%-22s" $fs; 
+                for disk in `lsvg -p $vg | tail +3 | awk '{print $1}'`; do
+                        lspv -l $disk | grep -q " ${fs}$" && printf "%-8s" $disk; 
+                done; 
+                echo
+        done; 
+done
+
