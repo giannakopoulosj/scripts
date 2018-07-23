@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/expect
+#https://docs.oracle.com/cd/E35328_01/E35336/html/vmcli-script.html
 
-/usr/bin/expect <<eol
 spawn sftp -oIdentityFile=$HOME/.ssh/my_ssh_key USER@SERVER
 expect "USER@SERVER\'s password:" 
 send "MY_PASSWORD\r"
@@ -11,4 +11,3 @@ send "get *\r"
 expect "sftp>"
 send "bye\r"
 interact
-eol
