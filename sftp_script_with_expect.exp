@@ -13,6 +13,7 @@ send "bye\r"
 interact
 #####################################
 #sftp_script_with_expect_v2.exp
+#http://empty.sourceforge.net/
 
 #!/usr/bin/expect
 spawn sftp user@SERVER
