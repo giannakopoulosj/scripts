@@ -11,3 +11,12 @@ send "get *\r"
 expect "sftp>"
 send "bye\r"
 interact
+#####################################
+#sftp_script_with_expect_v2.exp
+
+#!/usr/bin/expect
+spawn sftp user@SERVER
+expect sftp> {send pwd\r}
+expect sftp> {send lpwd\r}
+expect sftp> {send exit\r}
+expect eof
