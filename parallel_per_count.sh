@@ -9,7 +9,7 @@ echo $my_file &
 pids+=" $!"
 echo "PID of $SCRIPT is: $(echo $pids|awk '{print $NF}')"
 
-bg_procs=$(wc -w <<< $hello)
+bg_procs=$(wc -w <<< $pids)
 
 
 #go to check if the thread level is in place
