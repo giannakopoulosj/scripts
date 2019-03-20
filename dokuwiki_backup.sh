@@ -1,14 +1,5 @@
 #!/usr/bin/python
 
-"""
- 27/12/2018 - I.Giannakopoulos - V1.0.0 - Initial Script to take backup wiki @el1001wiki server of Eurobank.
- 28/12/2018 - I.Giannakopoulos - V1.0.1 - Logging typo improvment & bkp_file construction change to variables.
- 03/01/2019 - I.Giannakopoulos - V1.0.2 - Updated typo fixes on bkp_file.
- 04/01/2019 - I.Giannakopoulos - V1.0.3 - Updated typo fixes on bkp_path used by glob function.
- 15/01/2019 - I.Giannakopoulos - V1.0.5 - Updated bkp_retention days to 2 and fixed type in logging.
- 20/03/2019 - I.Giannakopoulos - V1.0.6 - Changed wiki path to httpd24-htttp and updated logging strings.
-"""
-
 import subprocess
 import time
 import os
