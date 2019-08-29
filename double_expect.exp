@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+
+spawn scp /TEST1.txt root@10.211.30.190:/root/
+expect "*assword:*"
+send "password\r"
+expect eof
+
+spawn scp /TEST2.txt root@10.211.30.190:/root/
+expect "*assword:*"
+send "password\r"
+expect eof
+exit
