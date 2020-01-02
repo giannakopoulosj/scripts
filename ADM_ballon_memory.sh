@@ -7,7 +7,7 @@ vmware-toolbox-cmd stat balloon
 # check balloon driver
 # vmmemctl->VMware driver 
 #vmware_balloon-->RHEL driver
-lsmod | grep -E 'vmmemctl|vmware_balloon'
+lsmod | grep -E 'vmmemctl|vmware_balloon|vmw_balloon|balloon'
 
 
 #memory utilization
