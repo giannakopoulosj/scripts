@@ -2,12 +2,11 @@
 
 #housekeep script for more than 30 days
 
-
+#Global Variables
 MTIME=30
 pids=""
 
-
-
+#Applicaiton Variables
 FILE_DIR1="/path1"
 LOG_DIR1="/scriptlog/housekeep_bt_gr_in_$(date +'%Y%m%d').log"
 
