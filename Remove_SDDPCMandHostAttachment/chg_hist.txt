@@ -1,0 +1,15 @@
+
+     This document lists the change history for different package versions
+
+                            Aug  9, 2012
+
+
+Changes in rmSDDPCMandHA.sh 1.3 (compared with rmSDDPCMandHA.sh 1.2)
+defect(s): 5128
+__________________________________________________________________________________
+
+
+1) handle installp return code properly
+2) DS5020 device odm change
+   - previous script will not be able to uninstall sddpcm and HA if DS5020 is used as SAN boot device
+
