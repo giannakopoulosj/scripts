@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#checks the limits of the user.
 paste <(grep 'open files\|processes\|pending signals' /proc/self/limits | 
         cut -c27-38)       <(i=`whoami` ; lsof -u $i | tail -n +2 | awk {'print $9'} | wc -l; 
                      ps --no-headers -U $i -u $i u | wc -l ; 
