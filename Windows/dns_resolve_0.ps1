@@ -1,4 +1,6 @@
-$ips = GC C:\Users\myname\Desktop\dns\ip_list.txt
+
+$my_user=((gwmi win32_computersystem).username).split('\')[1]
+$ips = GC C:\Users\$my_user\Desktop\dns\ip_list.txt
 
 Foreach ($ip in $ips)        {
 $name = nslookup -l 1.5.1.2 $ip 2> $null | select-string -pattern "Name:"
