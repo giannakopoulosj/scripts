@@ -4,8 +4,7 @@ KERN=`uname -r | awk -F. '{ printf("%d.%d\n",$1,$2); }'`
 HPG_SZ=`grep Hugepagesize /proc/meminfo | awk '{print $2}'`
 # Start from 1 pages to be on the safe side and guarantee 1 free HugePage
 NUM_PG=1
-# Cumulative number of pages required to handle the running shared memory
-segments
+# Cumulative number of pages required to handle the running shared memory segments
 for SEG_BYTES in `ipcs -m | awk '{print $5}' | grep "[0-9][0-9]*"`
 do
 MIN_PG=`echo "$SEG_BYTES/($HPG_SZ*1024)" | bc -q`
