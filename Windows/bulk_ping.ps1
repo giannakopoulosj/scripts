@@ -15,3 +15,4 @@ ComputerName=$Server
 Status=$status 
 }|select ComputerName,Status|Export-Csv -Path "$OutputPath" -Append -NoTypeInformation 
 }
+
