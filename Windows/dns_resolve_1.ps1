@@ -1,13 +1,13 @@
 #Variables
 $my_dns = "1.2.3.4"
-$my_user=((gwmi win32_computersystem).username).split('\')[1]
-$ip = GC C:\Users\$my_user\Desktop\ip.txt
+$my_user=((Get-WmiObject win32_computersystem).username).split('\')[1]
+$ip = Get-Content C:\Users\$my_user\Desktop\ip.txt
 $my_reverse = ""
 $my_reverse_host =""
 
 
-Echo "We will use DNS`: $my_dns"
-Echo "MyIP,ReverseRecord,ARecordFromReverse"
+Write-Output "We will use DNS`: $my_dns"
+Write-Output "MyIP,ReverseRecord,ARecordFromReverse"
 foreach ($my_ip in $ip) {
 
 #Get Host from IP
@@ -19,6 +19,6 @@ $my_reverse_host = nslookup $my_reverse  | select-string -pattern "Address:" | S
 $my_reverse_host = ($my_reverse_host -split":")[1].trim()
 
 
-Echo " $my_ip`,$my_reverse`,$my_reverse_host "
+Write-Output " $my_ip`,$my_reverse`,$my_reverse_host "
 
 }
