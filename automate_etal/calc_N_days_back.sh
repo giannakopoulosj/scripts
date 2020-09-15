@@ -3,7 +3,9 @@
 
 
 #Linux
-_DAYSBACK=$(date -d "-$1 day" +'%Y%m%d')
+_DAYS=1
+_DAYSBACK=$(date -d "-$_DAYS day" +'%Y%m%d')
+_YEARBACK==$(date -d "-1 year" +'%Y%m%d')
 echo $_DAYSBACK
 
 #non linux systems AIX??? / SOLARIS
