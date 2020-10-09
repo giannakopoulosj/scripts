@@ -1,0 +1,16 @@
+#!/usr/bin/expect -f
+
+set SERVER [lindex $argv 0]
+set USERNAME [lindex $argv 1]
+set PASSWORD [lindex $argv 2]
+
+spawn /usr/bin/ssh-copy-id $USERNAME@$SERVER
+expect {
+"Are you sure you want to continue connecting (yes/no)?"
+{
+send "yes\r"
+}
+}
+expect "$USERNAME@$SERVER\'s password:"
+send "$PASSWORD\r"
+expect eof
