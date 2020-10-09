@@ -13,4 +13,10 @@ send "yes\r"
 }
 expect "$USERNAME@$SERVER\'s password:"
 send "$PASSWORD\r"
+expect {
+"$USERNAME@$SERVER\'s password:"
+{
+send "\003"
+}
+}
 expect eof
