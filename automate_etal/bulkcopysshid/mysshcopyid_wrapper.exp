@@ -4,7 +4,7 @@ set SERVER [lindex $argv 0]
 set USERNAME [lindex $argv 1]
 set PASSWORD [lindex $argv 2]
 
-spawn /usr/bin/ssh-copy-id $USERNAME@$SERVER
+spawn /usr/bin/ssh-copy-id $USERNAME@$SERVER >/dev/null 2>&1
 expect {
 "Are you sure you want to continue connecting (yes/no)?"
 {
