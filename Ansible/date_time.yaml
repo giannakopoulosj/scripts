@@ -1,0 +1,31 @@
+---
+- name: Set Date Time
+  hosts: 1.2.3.4
+
+  tasks:
+
+  - name: "Check/Add 10.0.0.2 NTP"
+    lineinfile:
+      path: /etc/chrony.conf
+      line: "server 10.0.0.2 iburst"
+      insertafter: "# These servers were defined in the installation:"
+
+  - name: "Check/Add10.0.0.3 NTP"
+    lineinfile:
+      path: /etc/chrony.conf
+      line: "server 10.0.0.3 iburst"
+      insertafter: "# These servers were defined in the installation:"
+
+  - name: Set timezone to Europe/Athens
+    timezone:
+      name: Europe/Athens
+
+  - name: Enable service chornyd
+    service:
+     name: chronyd
+     enabled: yes
+
+  - name: Start/Restart state
+    service:
+     name: chronyd
+     state: restarted

@@ -1,0 +1,15 @@
+---
+- name: Add Server1 and Server2 to /etc/hosts
+  hosts: 10.211.83.84
+
+  tasks: 
+
+  - name: Add mappings to /etc/hosts
+    blockinfile:
+     path: /etc/hosts
+     block: |
+      {{ item.ip }} {{ item.name }}
+     marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+    with_items:
+     - { name: Server1, ip: 10.0.0.1 }
+     - { name: Server2, ip: 10.0.0.2 }

@@ -1,0 +1,15 @@
+---
+- name: Add Server1 and Server2 to /etc/hosts
+  hosts: 1.2.3.4
+
+  tasks:
+
+  - name: "Check/Add Server1 to host file"
+    lineinfile:
+      path: /etc/hosts
+      line: "10.0.0.2 server1.local server1"
+
+  - name: "Check/Add server3 to host file"
+    lineinfile:
+      path: /etc/hosts
+      line: "10.0.0.3 server3.local server3"

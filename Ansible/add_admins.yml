@@ -1,0 +1,41 @@
+---
+- hosts: "1.2.3.4"
+  connection: "ssh"
+
+  vars:
+
+    users:
+    - "erevos
+    - "giannakopoulosj"
+    - "igiannakopoulos
+
+    password: 'lrCzM6QaGpMuk'
+
+    group: 'admin'
+    
+    comments: 'AnsibleCreated User'
+
+  tasks:
+
+    - name: "Create admin group"
+      group:
+        name: "{{ group }}"
+        state: present
+
+    - name: "Create user accounts"
+      user:
+        name: "{{ item }}"
+        group: "{{ group }}"
+        shell: "/bin/bash"
+        comment: "{{ comments }}"
+        password: "{{ password }}"
+      with_items: "{{ users }}"
+
+    - name: "Add admin user to the sudoers"
+      copy:
+        dest: "/etc/sudoers.d/admins"
+        content: "%admin  ALL=(ALL)  PASSWD: ALL"
+
+    - name: "Expire Accounts"
+      shell: passwd -e "{{ item }}"
+      with_items: "{{ users }}"
