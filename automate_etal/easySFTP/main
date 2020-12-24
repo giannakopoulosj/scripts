@@ -1,0 +1,41 @@
+#!/bin/bash
+
+local USER=xx
+local REMOTE=xx.ux
+local REMOTE_PATH="/home/xx"
+local LOCAL_PATH="/home/xx"
+local FILE="*.txt"
+local COMMAND_FILE=$$.commands.sftp
+local ACTION=get
+local SFTP_NAME="mysftp"
+
+
+#Loading sanity checks and action functions.
+. ./sanity_checks.sh
+. ./command_file_create.sh
+
+#Call Sanity checks.
+start_sanity_checks $USER $REMOTE $REMOTE_PATH $LOCAL_PATH
+#local_dir_check $_LOCAL_PATH
+#check_sftp_connectivity $_USER $_REMOTE
+#check_sftp_remote $_USER $_REMOTE $_REMOTE_PATH
+
+
+#Construct Sftp file with corresponding action
+
+#send $COMMAND_FILE $LOCAL_PATH $REMOTE_PATH $FILE
+#sendclean $COMMAND_FILE $LOCAL_PATH $REMOTE_PATH $FILE
+get $COMMAND_FILE $LOCAL_PATH $REMOTE_PATH $FILE
+
+
+############################EXECUTE & VERIFICATION OF SFTP
+sftp -b $COMMAND_FILE $USER@$REMOTE > " $$.log"
+vreturn=$?
+
+if [ $vreturn -ne 0 ]
+then
+    echo "sftp step failed check log file..."
+exit 1
+
+fi
+
