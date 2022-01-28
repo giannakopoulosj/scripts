@@ -1,0 +1,22 @@
+# docker-compose.yml
+#docker exec -it first sh 
+#docker exec -it second sh 
+version: '3'
+
+services:
+  container1:
+    image: busybox
+    privileged: true
+    user: root
+    container_name: first
+    stdin_open: true
+    volumes:
+      - ~/shared_data:/opt/my_first_data
+  container2:
+    image: busybox
+    privileged: true
+    user: root
+    container_name: second
+    stdin_open: true
+    volumes:
+      - ~/shared_data:/opt/my_second_data
