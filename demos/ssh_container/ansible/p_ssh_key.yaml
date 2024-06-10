@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDEiHC6ziKexhfZk5jAgfRMscVCpMfoO1mwMUMbmySdc8Xc56uZkSpiv87Kl4XkhwcvDn0YTeSaKm3Eejz0c6Soxm+qWmpV+j+LV9nmafErSp5ci6qyCcOmo5TBuyQ1lgL6Sp8mMhoMo4MLlIt158i0IcHBhfk0KVRSzbiYdmkRNexmbTJNmQgeafTvo1zcCUl7nOyqs4wixKz1ehcZf1OKK37wRfvEZwDz309legnVvRhbITMrte1at401aGAFEMFk/oMtwFlJZVqbhby7etjPkvfU/tGhyOyo1SLEzyX6NpOFXPpYjnyiUcOQC/5krOAYCa4625H3EgFaWX+FzamhdtP5DLzTfI0H8e5BSEgn6UBwmsKpp5J2vYJmWRpq68CghSciiEWLvPDvLQ2KBG5BVCpVydjgBbmi9RDasZYp3QBAyraRboC6B23Bix54wNSTOsonzAp+igTv+jElUdWHhPLp0Uy8dU4ZdLklXdfYdm/kv4zhYwDB3rxc9YQeYk= igiannakopoulos@SWG-1599"
+    target_user: "root"
+
+  tasks:
+
+    - name: Add SSH key to authorized_keys
+      authorized_key:
+        user: "{{ target_user }}"
+        state: present
+        exclusive: true
+        key: |
+          {{ ssh_key }}
+          {{ lookup('file', './admin.keys.pub') }}

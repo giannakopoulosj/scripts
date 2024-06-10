@@ -1,0 +1,16 @@
+---
+- name: Get kernel version from all servers
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Print the kernel version
+      debug:
+        msg: "Kernel version on {{ inventory_hostname }} is {{ ansible_kernel }}"
+    - name: Get last reboot time
+      command: who -b
+      register: last_reboot
+
+    - name: Print the kernel version and last reboot time
+      debug:
+        msg: |
+          Kernel version on {{ inventory_hostname }} is {{ ansible_kernel }} and Reboot time is {{ last_reboot.stdout }}

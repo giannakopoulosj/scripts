@@ -1,0 +1,18 @@
+services:
+  ssh_centos8:
+    build:
+      context: .
+      dockerfile: Dockerfile.centos8
+    ports:
+      - "2222:22"
+    restart: always
+
+
+  ssh_ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    ports:
+      - "2223:22"
+    restart: always
+

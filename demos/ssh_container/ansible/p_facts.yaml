@@ -1,0 +1,13 @@
+---
+- hosts: all
+
+
+  tasks:
+
+  - name: Print ansible_distribution
+    debug:
+      msg: "{{ ansible_distribution |lower}}"
+
+  - name: Print ansible_distribution
+    debug:
+      msg: "{{ ansible_distribution |lower}}"

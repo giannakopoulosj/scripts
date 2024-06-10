@@ -1,0 +1,52 @@
+---
+- hosts: all
+  gather_facts: true
+
+  tasks:
+  - name: Check if distribution is CentOS or RHEL
+    assert:
+      that:
+        - ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+      fail_msg: "Distribution is {{ansible_distribution}}"
+      success_msg: "Distribution is {{ansible_distribution}}"
+
+  - name: Enable epel repository
+    dnf:
+      name:
+        - 'epel-release'
+      state: present
+      update_cache: true
+    when: ansible_distribution in ['CentOS', 'RedHat']
+
+  - name: Install Generic Packages
+    dnf:
+      name:
+        - 'nmon'
+        - 'yum-utils'
+        - 'device-mapper-persistent-data'
+        - 'lvm2'
+        - 'python3-pip'
+        - 'lsof'
+        - 'wget'
+        - 'vim'
+        - 'curl'
+      state: present
+      update_cache: true
+    when: ansible_distribution in ['CentOS', 'RedHat']
+
+  - name: Add Docker repository
+    command: yum-config-manager --add-repo https://download.docker.com/linux/{{ ansible_distribution | lower }}/docker-ce.repo
+    changed_when: false
+    when: ansible_distribution in ['CentOS', 'RedHat']
+
+  - name: Install Docker Engine, Docker CLI, Containerd, Docker Buildx plugin, and Docker Compose plugin
+    dnf:
+      name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+      state: present
+      update_cache: true
+    when: ansible_distribution in ['CentOS', 'RedHat']

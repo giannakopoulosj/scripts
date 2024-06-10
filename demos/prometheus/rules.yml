@@ -1,0 +1,6 @@
+groups:
+ - name: Check if http 2xx
+   rules:
+   - alert: Google Is Down
+     expr: probe_success{instance="https://google.com"} == 0
+     for: 10s
