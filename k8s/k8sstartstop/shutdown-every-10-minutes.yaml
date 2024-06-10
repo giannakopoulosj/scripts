@@ -1,0 +1,58 @@
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: shutdown-every-10-minutes
+  namespace: app-etiop-dev-cu-infrastructure
+
+spec:
+  schedule: '*/10 * * * *'
+  concurrencyPolicy: Allow
+  suspend: false
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: default
+          schedulerName: default-scheduler
+          terminationGracePeriodSeconds: 30
+          securityContext: {}
+          containers:
+            - resources: {}
+              terminationMessagePath: /dev/termination-log
+              name: shutdown
+              command:
+                - /bin/bash
+                - '-c'
+                - |
+                  cp /scripts/shutdown.sh /tmp/shutdown.sh
+                  chmod +x /tmp/shutdown.sh
+                  /tmp/shutdown.sh
+              env:
+                - name: NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.namespace
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+                - name: script-volume
+                  mountPath: /scripts
+              terminationMessagePolicy: File
+              image: 'quay.io/openshift/origin-cli:4.12'
+          serviceAccount: default
+          volumes:
+            - name: script-volume
+              configMap:
+                name: shutdown-script
+                items:
+                  - key: shutdown.sh
+                    path: shutdown.sh
+                defaultMode: 420
+          dnsPolicy: ClusterFirst
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1

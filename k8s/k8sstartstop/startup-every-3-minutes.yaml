@@ -1,0 +1,57 @@
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: startup-every-3-minutes
+  namespace: app-etiop-dev-cu-infrastructure
+spec:
+  schedule: '*/3 * * * *'
+  concurrencyPolicy: Allow
+  suspend: false
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: default
+          schedulerName: default-scheduler
+          terminationGracePeriodSeconds: 30
+          securityContext: {}
+          containers:
+            - resources: {}
+              terminationMessagePath: /dev/termination-log
+              name: startup
+              command:
+                - /bin/bash
+                - '-c'
+                - |
+                  cp /scripts/startup.sh /tmp/startup.sh
+                  chmod +x /tmp/startup.sh
+                  /tmp/startup.sh
+              env:
+                - name: NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.namespace
+              imagePullPolicy: IfNotPresent
+              volumeMounts:
+                - name: script-volume
+                  mountPath: /scripts
+              terminationMessagePolicy: File
+              image: 'quay.io/openshift/origin-cli:4.12'
+          serviceAccount: default
+          volumes:
+            - name: script-volume
+              configMap:
+                name: startup-script
+                items:
+                  - key: startup.sh
+                    path: startup.sh
+                defaultMode: 420
+          dnsPolicy: ClusterFirst
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1

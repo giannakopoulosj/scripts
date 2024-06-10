@@ -1,0 +1,40 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: shutdown-script
+  namespace: app-etiop-dev-cu-infrastructure
+  uid: a26891ec-4d2a-4369-aaf8-65ad10500b9b
+  resourceVersion: '111791969'
+  creationTimestamp: '2024-06-07T13:44:26Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2024-06-07T13:44:26Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:shutdown.sh': {}
+data:
+  shutdown.sh: >
+    #!/bin/bash
+
+    NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+
+    # Get all deployments and statefulsets in the namespace
+
+    scaleDownResources=$(oc get deployments,statefulsets -n $NAMESPACE
+    -o=jsonpath='{range
+    .items[*]}{.kind}{"\t"}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}')
+
+    # Loop through each resource
+
+    while IFS=$'\t' read -r kind namespace resource; do
+        # Skip if kind is "List"
+        if [ "$kind" != "List" ]; then
+            # Set replicas to 0
+            oc scale "$kind" --replicas=0 -n "$namespace" "$resource"
+            echo "Set $kind $resource in namespace $namespace to 0 replicas."
+        fi
+    done <<< "$scaleDownResources"

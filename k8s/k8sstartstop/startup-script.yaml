@@ -1,0 +1,49 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: startup-script
+  namespace: app-etiop-dev-cu-infrastructure
+  uid: 8e79c533-dbae-4508-9e97-750ee3dfc74d
+  resourceVersion: '111792863'
+  creationTimestamp: '2024-06-07T13:45:03Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2024-06-07T13:45:03Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:data':
+          .: {}
+          'f:startup.sh': {}
+data:
+  startup.sh: >
+    #!/bin/bash
+
+    NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+
+    # Define resources to scale to 2 replicas
+
+    resources_to_scale_up=("elasticsearch-master")
+
+    # Get all deployments and statefulsets in the namespace
+
+    scaleUpResources=$(oc get deployments,statefulsets -n $NAMESPACE
+    -o=jsonpath='{range
+    .items[*]}{.kind}{"\t"}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}')
+
+    while IFS=$'\t' read -r kind namespace resource; do
+        # Skip if kind is "List"
+        if [ "$kind" != "List" ]; then
+            # Check if the current resource is in the list of resources to scale up
+            if [[ " ${resources_to_scale_up[@]} " =~ " $resource " ]]; then
+                # Set replicas to 2 for resources in the list
+                oc scale "$kind" --replicas=2 -n "$namespace" "$resource"
+                echo "Set $kind $resource in namespace $namespace to 2 replicas."
+            else
+                # Set replicas to 1 for other resources
+                oc scale "$kind" --replicas=1 -n "$namespace" "$resource"
+                echo "Set $kind $resource in namespace $namespace to 1 replicas."
+            fi
+        fi
+    done <<< "$scaleUpResources"

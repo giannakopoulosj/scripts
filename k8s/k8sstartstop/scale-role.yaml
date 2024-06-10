@@ -1,0 +1,36 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: scale-role
+  namespace: app-etiop-dev-cu-infrastructure
+  uid: c1f8e272-5728-46a9-8eae-0b3931f17503
+  resourceVersion: '111823084'
+  creationTimestamp: '2024-06-07T14:02:06Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: rbac.authorization.k8s.io/v1
+      time: '2024-06-07T14:06:16Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:rules': {}
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+      - patch
+      - update
+    apiGroups:
+      - apps
+    resources:
+      - deployments
+      - statefulsets
+  - verbs:
+      - patch
+      - update
+    apiGroups:
+      - apps
+    resources:
+      - deployments/scale
+      - statefulsets/scale
